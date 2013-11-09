@@ -1,0 +1,16 @@
+.red, .blue, .green {
+	width=1000px;
+	height=1000px;
+	position: fixed;
+	top:0px;
+	right:0px;
+}
+.red {
+	background-color: #f00;
+}
+.blue {
+	background-color: #00f;
+}
+.green {
+	background-color: #0f0;
+}
