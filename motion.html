@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" ></script>
+
+<body>
+<script>
+		var beta = 0;
+		function init() {
+      //Find our div containers in the DOM
+      var dataContainerOrientation = document.getElementById('dataContainerOrientation');
+      var context = canvas.getContext("video");
+ 
+      //Check for support for DeviceOrientation event
+      if(window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', function(event) {
+                beta = event.beta;
+                if(beta>20){
+					context.drawImage(video, 0, 0, 640, 480);
+				}
+ 
+                if(beta!=null) 
+                  dataContainerOrientation.innerHTML = beta;
+              }, false);
+      }
+    }
+
+    // Put event listeners into place
+		window.addEventListener("DOMContentLoaded", function() {
+			// Grab elements, create settings, etc.
+			var canvas = document.getElementById("canvas"),
+				context = canvas.getContext("2d"),
+				video = document.getElementById("video"),
+				videoSource = "6cda3516b55c34b8e564bdd1a3737bee0e25e76140a76cce0587b2c3febacbc2",
+				videoObj = { video: {
+      				optional: [{sourceId: videoSource}]
+    			}},
+    			constraints = {};
+    			constraints.video = {
+    					optional: [{ sourceId: videoSource}]
+    			},
+				errBack = function(error) {
+					console.log("Video capture error: ", error.code); 
+				};
+
+			// Put video listeners into place
+			if(navigator.getUserMedia) { // Standard
+				navigator.getUserMedia(videoObj, function(stream) {
+					video.src = stream;
+					video.play();
+				}, errBack);
+			} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+				navigator.webkitGetUserMedia(videoObj, function(stream){
+					video.src = window.webkitURL.createObjectURL(stream);
+					video.play();
+				}, errBack);
+			}
+
+			// Trigger photo take
+			document.getElementById("snap").addEventListener("click", function() {
+				context.drawImage(video, 0, 0, 640, 480);
+			});
+
+			
+			
+		}, false);  
+
+
+
+
+
+
+
+
+
+	
+</script>
+
+	
+	<body onload="init()">
+    <div id="dataContainerOrientation">
+      No device orientation data
+    </div>
+    <!--<video id="video" width="640" height="480" autoplay></video>
+	<button id="snap" class="sexyButton">Snap Photo</button>
+	<canvas id="canvas" width="640" height="480"></canvas>!-->
+
+	
+</body>
+		
+
+</body>
+</html>
