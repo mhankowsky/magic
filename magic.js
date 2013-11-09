@@ -22,43 +22,43 @@ function findLine(canvas){
   var context = canvas.getContext("2d");
   console.log(canvas.width);
   console.log(canvas.height);
-  var top_points = [];
-  var bot_points = [];
-  var lef_points = [];
-  var rig_points = [];
+  var TL_points = [];
+  var BL_points = [];
+  var TR_points = [];
+  var BR_points = [];
 
-//Top row
-  for(var i=0; i<canvas.width; i=i+5){
-    for(var j=0; j<50; j=j+2){
-    checkRed(canvas, i, j, top_points);
+//TL
+  for(var i=0; i<100; i=i+10){
+    for(var j=0; j<100; j=j+10){
+    checkRed(canvas, i, j, TL_points);
     }
   }
 
-  //Bottom
-  for(var i=0; i<canvas.width; i=i+5){
-    for(var j=(canvas.height-50); j<canvas.height; j=j+2){
-    checkRed(canvas, i, j, bot_points);
+  //BL
+  for(var i=0; i<100; i=i+10){
+    for(var j=(canvas.height-100); j<canvas.height; j=j+10){
+    checkRed(canvas, i, j, BL_points);
     }
   }
 
-  //left
-  for(var i=0; i<50; i=i+2){
-    for(var j=0; j<canvas.height; j=j+5){
-    checkRed(canvas, i, j, lef_points);
+  //TR
+  for(var i=(canvas.width-100); i<canvas.width; i=i+10){
+    for(var j=0; j<100; j=j+10){
+    checkRed(canvas, i, j, TR_points);
     }
   }
-
-  for(var i=(canvas.width-50); i<canvas.width; i=i+2){
-    for(var j=0; j<canvas.height; j=j+5){
-    checkRed(canvas, i, j, rig_points);
+  //BR
+  for(var i=(canvas.width-100); i<canvas.width; i=i+10){
+    for(var j=(canvas.height-100); j<canvas.height; j=j+10){
+    checkRed(canvas, i, j, BR_points);
     }
   }
 
         
-  var t_points = top_points.length;
-  var b_points = bot_points.length;
-  var l_points = lef_points.length;
-  var r_points = rig_points.length;
+  var t_points = TL_points.length;
+  var b_points = BL_points.length;
+  var l_points = TR_points.length;
+  var r_points = BR_points.length;
 
   var totals = [t_points, b_points, l_points, r_points];
   var winner = totals.indexOf(Math.max(t_points, b_points, l_points, r_points));
@@ -69,19 +69,19 @@ function findLine(canvas){
 
   switch(winner){
     case 0: 
-      winner = 'TOP';
+      winner = 'TL';
       rgb_string = "rgb(255,0,0)";
       break;
     case 1:
-      winner = 'BOT';
+      winner = 'BL';
       rgb_string = "rgb(0,255,0)";
       break;
     case 2:
-      winner = 'LEF';
+      winner = 'TR';
       rgb_string = "rgb(0,0,255)";
       break;
     case 3:
-      winner = 'RIG';
+      winner = 'BR';
       rgb_string = "rgb(155,0,155)";
       break;
     default:
@@ -96,7 +96,7 @@ function findLine(canvas){
 
 function checkRed(canvas, x, y, points){
   var rgb = getColor(canvas, x, y);
-  if(rgb[0]>150 && rgb[1]<140 && rgb[2]<140){
+  if(rgb[0]>150 && rgb[1]>150 && rgb[2]>150){
     var toAdd = new Point(x,y,rgb[0]);
     points.push(toAdd);
     console.log("Point added X:"+x+" Y:"+y);
