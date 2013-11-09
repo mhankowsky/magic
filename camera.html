@@ -20,7 +20,7 @@
       if(window.DeviceOrientationEvent) {
         window.addEventListener('deviceorientation', function(event) {
                 beta = event.beta;
-                if(beta>20){
+                if(beta>20 && beta<30){
 					context.drawImage(video, 0, 0, 640, 480);
           findLine(canvas);
 				}
