@@ -90,7 +90,9 @@ function findLine(canvas){
     }
 
   console.log(winner);
+  setTimeout(function() {
   document.body.style.backgroundColor = rgb_string;
+  }, (500));
 
 }
 
