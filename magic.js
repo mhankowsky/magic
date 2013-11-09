@@ -97,25 +97,32 @@ function findLine(canvas){
   console.log("Totals: "+totals);
 
   console.log(winner);
+  var rgb_string;
 
   switch(winner){
     case 0: 
       winner = 'TOP';
+      rgb_string = "rgb(255,0,0)";
       break;
     case 1:
       winner = 'BOT';
+      rgb_string = "rgb(0,255,0)";
       break;
     case 2:
       winner = 'LEF';
+      rgb_string = "rgb(0,0,255)";
       break;
     case 3:
       winner = 'RIG';
+      rgb_string = "rgb(155,0,155)";
       break;
     default:
       winner = ERR;
+      rgb_string = "rgb(0,0,0)";
     }
 
   console.log(winner);
+  document.body.style.backgroundColor = rgb_string;
 
 }
 
@@ -138,19 +145,3 @@ function getColor(canvas, x, y) {
  
     return rgb;
 }
-
-function canvasMouseMove(e) {
-      var x = e.layerX, y = e.layerY;
-          var rgb = getColor(canvas, x, y);
-              var rgb_string = "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
-
-                  document.body.style.backgroundColor = rgb_string;
-                    console.log(rgb_string);
-
-                  if(rgb[0]>150 && rgb[1]<120 && rgb[2]<120){
-                    console.log("RED at X:"+x+" Y:"+y);
-                  }
-
-}
-
-canvas.onmousemove = canvasMouseMove;
