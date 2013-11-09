@@ -64,6 +64,9 @@ function findLine(canvas){
   var winner = totals.indexOf(Math.max(t_points, b_points, l_points, r_points));
   console.log("Totals: "+totals);
 
+  if(Math.max(t_points, b_points, l_points, r_points)==0){
+    winner = -1;
+  }
   console.log(winner);
   var rgb_string;
 
@@ -92,7 +95,7 @@ function findLine(canvas){
   console.log(winner);
   setTimeout(function() {
   document.body.style.backgroundColor = rgb_string;
-  }, (500));
+  }, (1000));
 
 }
 
