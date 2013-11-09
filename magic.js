@@ -17,7 +17,6 @@ Point.prototype.getR = function(){
 
 
 
-var canvas = document.getElementById("canvas");
 
 function findLine(canvas){
   var context = canvas.getContext("2d");
